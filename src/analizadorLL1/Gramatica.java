@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -42,7 +43,7 @@ public class Gramatica {
 	}
 	
 	//Usaremos '1' como epsilon
-	public Set<Character> Cabecera(String std) {
+	public Set<Character> Cabecera(String std, Set<String> used) {
 		Set<Character> res = new TreeSet<Character>();
 		
 		char car = std.charAt(0);
@@ -58,11 +59,11 @@ public class Gramatica {
 			if(diccionario.containsKey(car)) {
 				for(String str : diccionario.get(car)) {
 					if(str!=std) {
-						Set<Character> s = Cabecera(str);
+						Set<Character> s = Cabecera(str, used);
 						if(s.contains('1')) {
 							String aux = std.substring(1);
 							if(!aux.isEmpty())
-								s.addAll(Cabecera(aux));
+								s.addAll(Cabecera(aux, used));
 								s.remove('1');									
 							}
 							res.addAll(s);
@@ -73,7 +74,7 @@ public class Gramatica {
 		
 		
 	
-		
+		used.add(std);
 		
 		
 		
@@ -82,7 +83,7 @@ public class Gramatica {
 
 	public static void main(String[] unused) {
 		Gramatica g = new Gramatica("aa.txt");
-		Set<Character> s =g.Cabecera("S");
+		Set<Character> s =g.Cabecera("S", new HashSet<>());
 		for(char c : s)
 			System.out.println(c);
 	}
