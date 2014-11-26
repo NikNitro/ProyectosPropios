@@ -57,17 +57,16 @@ public class Gramatica {
 		else {
 			if(diccionario.containsKey(car)) {
 				for(String str : diccionario.get(car)) {
-				
-					Set<Character> s = Cabecera(str);
-					if(s.contains('1')) {
-						s.remove('1');
-						String aux = std.substring(1);
-						if(!aux.isEmpty())
-							s.addAll(Cabecera(aux));
-								
-						}
-						res.addAll(s);
-								
+					if(str!=std) {
+						Set<Character> s = Cabecera(str);
+						if(s.contains('1')) {
+							String aux = std.substring(1);
+							if(!aux.isEmpty())
+								s.addAll(Cabecera(aux));
+								s.remove('1');									
+							}
+							res.addAll(s);
+					}
 				}
 			}
 		}
@@ -83,7 +82,7 @@ public class Gramatica {
 
 	public static void main(String[] unused) {
 		Gramatica g = new Gramatica("aa.txt");
-		Set<Character> s =g.Cabecera("AS");
+		Set<Character> s =g.Cabecera("S");
 		for(char c : s)
 			System.out.println(c);
 	}
