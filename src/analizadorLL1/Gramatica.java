@@ -62,11 +62,12 @@ public class Gramatica {
 						Set<Character> s = Cabecera(str, used);
 						if(s.contains('1')) {
 							String aux = std.substring(1);
-							if(!aux.isEmpty())
+							if(!aux.isEmpty()){
 								s.addAll(Cabecera(aux, used));
-								s.remove('1');									
+								s.remove('1');		
 							}
-							res.addAll(s);
+						}
+						res.addAll(s);
 					}
 				}
 			}
@@ -76,9 +77,13 @@ public class Gramatica {
 		return res;
 	}
 
+	public Set<Character> Siguiente() {
+		return null;
+	}
+	
 	public static void main(String[] unused) {
 		Gramatica g = new Gramatica("aa.txt");
-		Set<Character> s =g.Cabecera("S", new HashSet<>());
+		Set<Character> s =g.Cabecera("A", new HashSet<>());
 		for(char c : s)
 			System.out.println(c);
 	}
