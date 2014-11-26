@@ -12,8 +12,8 @@ import java.util.Set;
 import java.util.TreeSet;
 
 
-//No pueden existir dos elementos que tengan el mismo resultado en la gramatica
-//En principio lo haré para gramaticas no ambiguas
+//La gramática debe pasarse por texto de la forma S-A$ (sin espacios y a una por línea.
+//Aún no es seguro que no queden fallos.
 public class Gramatica {
 	private File archivo;
 	private Map<Character, List<String>> diccionario;
@@ -71,12 +71,7 @@ public class Gramatica {
 				}
 			}
 		}
-		
-		
-	
 		used.add(std);
-		
-		
 		
 		return res;
 	}
